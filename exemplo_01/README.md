@@ -1,19 +1,21 @@
 # 🛒 Sistema de Vendas com MCP + Chat IA
 
-> **Sistema completo de vendas integrado com Model Context Protocol (MCP) e chat inteligente usando Groq.ai**
+> **Sistema completo de vendas integrado com Model Context Protocol (MCP) e chat inteligente usando Groq.ai ou Google Gemini**
 
 [![Status](https://img.shields.io/badge/Status-Completo-brightgreen)]()
 [![MCP](https://img.shields.io/badge/MCP-12%20Tools-blue)]()
 [![Frontend](https://img.shields.io/badge/Frontend-React%2018-61dafb)]()
 [![Backend](https://img.shields.io/badge/Backend-Express-green)]()
+[![Multi-Provider](https://img.shields.io/badge/IA-Groq%20%7C%20Gemini-orange)]()
 
 ## 🎯 Visão Geral
 
-Este projeto demonstra uma implementação completa de um sistema de vendas moderno com chat inteligente, utilizando o **Model Context Protocol (MCP)** para conectar uma IA (Groq.ai) com dados reais de produtos e vendas.
+Este projeto demonstra uma implementação completa de um sistema de vendas moderno com chat inteligente, utilizando o **Model Context Protocol (MCP)** para conectar uma IA (Groq.ai ou Google Gemini) com dados reais de produtos e vendas.
 
 ### ✨ Principais Características
 
-- 🤖 **Chat IA Integrado** - Groq.ai com acesso a dados reais via MCP
+- 🤖 **Chat IA Multi-Provider** - Suporte a Groq.ai e Google Gemini
+- 🔄 **Troca Simples** - Mude de provider apenas editando .env
 - 📦 **Gestão Completa** - Produtos, vendas, estoque e analytics
 - 🛡️ **Anti-Alucinação** - Sistema robusto para prevenir dados inventados
 - 🔧 **12 Ferramentas MCP** - Operações especializadas em português
@@ -32,9 +34,9 @@ Este projeto demonstra uma implementação completa de um sistema de vendas mode
          │                       │                       │
          ▼                       ▼                       ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Groq.ai API   │    │   Database      │    │   API Client    │
-│   LLM Processing│    │   Products +    │    │   HTTP Requests │
-│   Anti-halluc.  │    │   Sales Data    │    │   Error Handling│
+│  Groq/Gemini    │    │   Database      │    │   API Client    │
+│  LLM Processing │    │   Products +    │    │   HTTP Requests │
+│  Multi-Provider │    │   Sales Data    │    │   Error Handling│
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
@@ -43,7 +45,9 @@ Este projeto demonstra uma implementação completa de um sistema de vendas mode
 ### Pré-requisitos
 
 - Node.js 18+
-- Token Groq.ai ([Obter aqui](https://console.groq.com/))
+- Token de IA (escolha um):
+  - **Groq.ai** ([Obter aqui](https://console.groq.com/)) - Recomendado para começar
+  - **Google Gemini** ([Obter aqui](https://aistudio.google.com/app/apikey)) - Alternativa gratuita
 
 ### Instalação Rápida
 
@@ -62,10 +66,13 @@ cd ../mcp-server && npm install
 # Frontend
 cd ../frontend && npm install
 
-# 3. Configure o token Groq
+# 3. Configure o token de IA
 cd frontend
-cp .env.example .env
-# Edite .env e adicione seu VITE_GROQ_API_KEY
+cp env.example .env
+# Edite .env e configure:
+# - VITE_IA_PROVIDER=groq (ou gemini)
+# - VITE_GROQ_API_KEY=seu-token (se usar Groq)
+# - VITE_GEMINI_API_KEY=seu-token (se usar Gemini)
 
 # 4. Execute tudo (3 terminais)
 # Terminal 1: cd backend && npm run dev
@@ -78,6 +85,93 @@ cp .env.example .env
 - 🌐 **Frontend:** http://localhost:3000
 - 🔌 **Backend API:** http://localhost:3001
 - ⚙️ **MCP Server:** Ativo via stdio
+
+## 🤖 Múltiplos Providers de IA
+
+O sistema suporta **dois providers de IA** que podem ser trocados facilmente:
+
+### Providers Disponíveis
+
+| Provider   | Velocidade      | Custo                     | Uso Recomendado         |
+| ---------- | --------------- | ------------------------- | ----------------------- |
+| **Groq**   | ⚡ Muito Rápido | 💰 Gratuito (com limites) | Desenvolvimento e demos |
+| **Gemini** | 🚀 Rápido       | 💚 Gratuito               | Produção e uso intenso  |
+
+### Como Trocar de Provider
+
+**Passo 1:** Edite o arquivo `.env` no frontend:
+
+```bash
+# Escolha o provider
+VITE_IA_PROVIDER=gemini  # ou 'groq'
+
+# Configure o token correspondente
+VITE_GEMINI_API_KEY=sua-chave-aqui
+# ou
+VITE_GROQ_API_KEY=sua-chave-aqui
+```
+
+**Passo 2:** Recarregue a aplicação - pronto! ✅
+
+### Obter Tokens
+
+#### Groq (Recomendado para começar)
+
+1. Acesse [console.groq.com](https://console.groq.com/)
+2. Faça login com GitHub ou Google
+3. Vá em "API Keys" → "Create API Key"
+4. Copie e adicione no `.env`
+
+#### Google Gemini (Gratuito e generoso)
+
+1. Acesse [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Faça login com sua conta Google
+3. Clique em "Get API Key" → "Create API Key"
+4. Copie e adicione no `.env`
+
+### Modelos Disponíveis
+
+#### Groq
+
+- `qwen/qwen3-32b` ⭐ **Padrão** - Rápido e preciso
+- `llama3-8b-8192` - Alternativa balanceada
+- `mixtral-8x7b-32768` - Mais poderoso
+
+#### Gemini
+
+- `gemini-2.0-flash-exp` ⭐ **Padrão** - Rápido e experimental
+- `gemini-1.5-pro` - Mais poderoso e estável
+- `gemini-exp-1206` - Experimental avançado
+
+Para trocar o modelo, edite `frontend/src/config/config-alunos.ts`:
+
+```typescript
+ia: {
+  provider: "gemini", // ou "groq"
+  gemini: {
+    modelo: "gemini-1.5-pro", // Trocar aqui
+    // ...
+  }
+}
+```
+
+### Comparação Técnica
+
+| Recurso          | Groq                | Gemini              |
+| ---------------- | ------------------- | ------------------- |
+| Function Calling | ✅ Sim              | ✅ Sim              |
+| Velocidade       | ⚡⚡⚡              | ⚡⚡                |
+| Rate Limits      | 30 req/min          | 60 req/min          |
+| Context Window   | 8K-32K tokens       | 128K tokens         |
+| Custo            | Gratuito (limitado) | Gratuito (generoso) |
+
+### Vantagens da Arquitetura Multi-Provider
+
+1. **Fallback Instantâneo** - Se um cair, muda para outro em segundos
+2. **Sem Vendor Lock-in** - Não depende de um único fornecedor
+3. **Educacional** - Alunos veem diferentes APIs de IA
+4. **Extensível** - Fácil adicionar Claude, GPT-4, etc.
+5. **Zero Mudança de Código** - Apenas variável de ambiente
 
 ## 🎮 Como Usar
 

@@ -140,8 +140,18 @@ exemplo_02/
 │   ├── config.js           # ⚙️ CONFIGURAR TOKEN AQUI!
 │   ├── index.html          # Interface split-screen
 │   ├── style.css           # Estilos mínimos
-│   └── app.js              # Lógica + Groq function calling
-└── GUIA_PROFESSOR.md       # 👨‍🏫 Passo-a-passo para workshop
+│   ├── app.js              # Lógica + Groq function calling
+│   └── personalidades/     # 🎭 Sistema modular de personalidades
+│       ├── index.js        # Carregador de personalidades
+│       ├── profissional.js # Personalidade formal
+│       ├── sarcastico.js   # Personalidade irônica
+│       ├── animado.js      # Personalidade empolgada
+│       ├── poeta.js        # Personalidade poética
+│       ├── minimalista.js  # Personalidade concisa
+│       ├── _TEMPLATE.js    # Template para novas
+│       └── README.md       # Documentação completa
+├── COMO_ADICIONAR_PERSONALIDADE.md  # 🎭 Guia rápido
+└── README.md               # Este arquivo
 ```
 
 ---
@@ -156,18 +166,35 @@ exemplo_02/
 4. Crie uma nova chave
 5. Copie o token
 
-### Configurar
+### Configurar Token
 
 Edite `frontend/config.js`:
 
 ```javascript
 const CONFIG = {
-  groq: {
-    token: "gsk_seu_token_aqui", // ← COLE SEU TOKEN
-    // ...
+  ia: {
+    groq: {
+      token: "gsk_seu_token_aqui", // ← COLE SEU TOKEN
+      modelo: "qwen/qwen3-32b",
+      // ...
+    },
   },
 };
 ```
+
+### Escolher Personalidade
+
+O sistema agora tem **personalidades modulares**! Escolha uma:
+
+```javascript
+const CONFIG = {
+  // ...
+  personalidade: "animado", // ← Altere aqui!
+  // Opções: profissional, sarcastico, animado, poeta, minimalista
+};
+```
+
+**📚 Para criar sua própria personalidade:** Veja `COMO_ADICIONAR_PERSONALIDADE.md`
 
 ---
 
@@ -224,6 +251,8 @@ Contém passo-a-passo completo de como conduzir o workshop no projetor.
 - ✅ Groq function calling
 - ✅ Anti-alucinação com dados reais
 - ✅ Integração Frontend + Backend + IA
+- ✅ Sistema modular de personalidades
+- ✅ ES6 Modules (import/export)
 
 ---
 
@@ -231,11 +260,47 @@ Contém passo-a-passo completo de como conduzir o workshop no projetor.
 
 Após dominar este exemplo:
 
-1. Adicione mais ferramentas (deletar, atualizar)
-2. Implemente persistência (arquivo/banco)
-3. Migre para TypeScript
-4. Use React (ver exemplo_01)
-5. Deploy em produção
+1. **Crie sua própria personalidade** (veja `COMO_ADICIONAR_PERSONALIDADE.md`)
+2. Adicione mais ferramentas (deletar, atualizar)
+3. Implemente persistência (arquivo/banco)
+4. Adicione recursos (resources) customizados no MCP
+5. Migre para TypeScript
+6. Use React (ver exemplo_01)
+7. Deploy em produção
+
+## 🎭 Sistema de Personalidades
+
+O exemplo_02 agora tem um **sistema modular de personalidades**!
+
+### Personalidades Disponíveis
+
+| ID           | Nome         | Descrição           |
+| ------------ | ------------ | ------------------- |
+| profissional | Profissional | Formal e objetivo   |
+| sarcastico   | Sarcástico   | Irônico mas útil    |
+| animado      | Animado      | Super empolgado! 🎉 |
+| poeta        | Poeta        | Linguagem poética   |
+| minimalista  | Minimalista  | Conciso e direto    |
+
+### Como Trocar de Personalidade
+
+Edite `frontend/config.js`:
+
+```javascript
+personalidade: "poeta", // ← Troque aqui!
+```
+
+### Como Criar Nova Personalidade
+
+**5 passos simples:**
+
+1. Copie `personalidades/_TEMPLATE.js`
+2. Preencha os campos (id, nome, prompt, boasVindas)
+3. Salve como `personalidades/genio.js`
+4. Importe no `personalidades/index.js`
+5. Adicione ao array `PERSONALIDADES_DISPONIVEIS`
+
+**📖 Guia completo:** `COMO_ADICIONAR_PERSONALIDADE.md`
 
 ---
 

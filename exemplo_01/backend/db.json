@@ -107,6 +107,14 @@
       "description": "Teclado mecânico com switches Cherry MX, iluminação RGB personalizável e teclas programáveis",
       "stock": 52,
       "createdAt": "2024-04-01T09:20:00Z"
+    },
+    {
+      "name": "Monitor",
+      "price": 999,
+      "category": "Periféricos",
+      "description": "monitor gamer",
+      "stock": 100,
+      "id": 13
     }
   ],
   "sales": [

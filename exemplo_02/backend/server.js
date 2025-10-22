@@ -1,11 +1,10 @@
 /**
- * 🚀 SERVIDOR EXPRESS ULTRA-SIMPLES
+ * 🚀 SERVIDOR EXPRESS
  *
  * Apenas 2 endpoints:
  * - GET /produtos - Lista todos os produtos
  * - POST /produtos - Cria um novo produto
  *
- * 👨‍🏫 CONSTRUIR COM OS ALUNOS
  */
 
 const express = require("express");
@@ -20,44 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // ========== ENDPOINT 1: LISTAR PRODUTOS ==========
-app.get("/produtos", (req, res) => {
-  console.log("📦 GET /produtos - Listando", mock.produtos.length, "produtos");
-  res.json(mock.produtos);
-});
 
 // ========== ENDPOINT 2: CRIAR PRODUTO ==========
-app.post("/produtos", (req, res) => {
-  const { nome, preco, categoria } = req.body;
-
-  // Validação simples
-  if (!nome || !preco || !categoria) {
-    return res.status(400).json({
-      erro: "Campos obrigatórios: nome, preco, categoria",
-    });
-  }
-
-  // Criar novo produto
-  const novoProduto = {
-    id: mock.proximoId++,
-    nome,
-    preco: parseFloat(preco),
-    categoria,
-  };
-
-  // Adicionar ao array
-  mock.produtos.push(novoProduto);
-
-  console.log("✅ POST /produtos - Produto criado:", novoProduto);
-  res.status(201).json(novoProduto);
-});
 
 // ========== HEALTH CHECK ==========
-app.get("/health", (req, res) => {
-  res.json({
-    status: "ok",
-    produtos: mock.produtos.length,
-  });
-});
 
 // Iniciar servidor
 app.listen(PORT, () => {
