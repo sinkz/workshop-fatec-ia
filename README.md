@@ -155,28 +155,36 @@ cd exemplo_01  # ou exemplo_02 ou exemplo_03
 
 ## 📖 Documentação por Exemplo
 
-Cada exemplo possui documentação completa em sua pasta:
+Cada exemplo possui documentação essencial e centralizada:
 
-### Exemplo 01 (Sistema de Vendas)
+### 🛒 Exemplo 01 (Sistema de Vendas)
 
-- 📄 [README.md](./exemplo_01/README.md) - Visão geral e setup
-- 📚 [ROADMAP_WORKSHOP.md](./exemplo_01/docs/ROADMAP_WORKSHOP.md) - Plano de aula
-- 🏛️ [ARQUITETURA_EDUCACIONAL.md](./exemplo_01/mcp-server/ARQUITETURA_EDUCACIONAL.md) - Conceitos MCP
+| Arquivo                                                              | Descrição                                              |
+| -------------------------------------------------------------------- | ------------------------------------------------------ |
+| 📄 [README.md](./exemplo_01/README.md)                               | **Documentação principal** - Setup, arquitetura, guias |
+| 📊 [FLUXO.md](./exemplo_01/FLUXO.md)                                 | Diagrama de comunicação entre serviços                 |
+| 📚 [docs/ROADMAP_WORKSHOP.md](./exemplo_01/docs/ROADMAP_WORKSHOP.md) | Plano de aula para professores                         |
 
-### Exemplo 02 (Produtos Simples)
+### 📦 Exemplo 02 (Produtos Simples)
 
-- 📄 [README.md](./exemplo_02/README.md) - Visão geral e setup
-- 👨‍🏫 [GUIA_PROFESSOR.md](./exemplo_02/GUIA_PROFESSOR.md) - Roteiro para professores
-- 🔧 [COMO_FUNCIONA_RESOURCES.md](./exemplo_02/COMO_FUNCIONA_RESOURCES.md) - MCP Resources explicado
-- 🧪 [TESTE_INTEGRACAO_MCP.md](./exemplo_02/TESTE_INTEGRACAO_MCP.md) - Testes práticos
+| Arquivo                                                                                | Descrição                                                     |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 📄 [README.md](./exemplo_02/README.md)                                                 | **Documentação principal** - Setup, conceitos, personalidades |
+| 📊 [FLUXO.md](./exemplo_02/FLUXO.md)                                                   | Diagrama de arquitetura simplificada                          |
+| 🎭 [frontend/personalidades/README.md](./exemplo_02/frontend/personalidades/README.md) | Guia do sistema de personalidades                             |
 
-### Exemplo 03 (ReceitasIA)
+### 🍳 Exemplo 03 (ReceitasIA)
 
-- 📄 [README.md](./exemplo_03/README.md) - Visão geral e setup
-- ⚙️ [COMO_RODAR.md](./exemplo_03/COMO_RODAR.md) - Instruções rápidas
-- 📚 [ROADMAP_WORKSHOP.md](./exemplo_03/docs/ROADMAP_WORKSHOP.md) - Cronograma 4h
-- 👨‍🎓 [CONFIGURACAO_ALUNOS.md](./exemplo_03/docs/CONFIGURACAO_ALUNOS.md) - Guia alunos
-- 🔧 [TROUBLESHOOTING.md](./exemplo_03/docs/TROUBLESHOOTING.md) - Solução de problemas
+| Arquivo                                                                    | Descrição                                                  |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| 📄 [README.md](./exemplo_03/README.md)                                     | **Documentação principal** - Setup completo, Neon, Next.js |
+| 📊 [FLUXO.md](./exemplo_03/FLUXO.md)                                       | Diagrama Next.js + MCP + Neon                              |
+| 📚 [docs/ROADMAP_WORKSHOP.md](./exemplo_03/docs/ROADMAP_WORKSHOP.md)       | Cronograma de workshop 4-6h                                |
+| 🔧 [docs/TROUBLESHOOTING.md](./exemplo_03/docs/TROUBLESHOOTING.md)         | Solução de problemas comuns                                |
+| 🗄️ [docs/NEON_MCP_SETUP.md](./exemplo_03/docs/NEON_MCP_SETUP.md)           | Configuração do Neon PostgreSQL                            |
+| 👨‍🎓 [docs/CONFIGURACAO_ALUNOS.md](./exemplo_03/docs/CONFIGURACAO_ALUNOS.md) | Guia simplificado para alunos                              |
+
+> 💡 **Dica**: Comece sempre pelo README.md do exemplo escolhido. Ele contém tudo que você precisa!
 
 ---
 
