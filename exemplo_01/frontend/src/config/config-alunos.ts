@@ -24,7 +24,7 @@ export const CONFIG_ALUNOS = {
     // Configuração Groq
     groq: {
       token: import.meta.env.VITE_GROQ_API_KEY || "configure-seu-token-no-env",
-      modelo: "llama-3.1-8b-instant",
+      modelo: "qwen/qwen3-32b",
       temperatura: 0.6,
       maxTokens: 4096,
     },
