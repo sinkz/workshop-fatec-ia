@@ -7,19 +7,36 @@
  */
 
 const CONFIG = {
-  // 🤖 Configuração do Groq.ai
+  // 🤖 Configuração de IA - MULTI-PROVIDER
+  ia: {
+    // Provider ativo: 'groq' ou 'gemini'
+    provider: "groq", // ← MUDE AQUI para trocar de provider!
+
+    // Configuração Groq
+    groq: {
+      // Cole seu token aqui (obter em https://console.groq.com/)
+      token: "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",
+      modelo: "qwen/qwen3-32b",
+      temperatura: 0.6,
+      maxTokens: 1000,
+    },
+
+    // Configuração Gemini
+    gemini: {
+      // Cole seu token aqui (obter em https://aistudio.google.com/app/apikey)
+      token: "",
+      modelo: "gemini-1.5-flash",
+      temperatura: 0.6,
+      maxTokens: 1000,
+    },
+  },
+
+  // 🤖 LEGADO: Mantido para compatibilidade (usa ia.groq)
   groq: {
-    // Cole seu token aqui (obter em https://console.groq.com/)
-    token: "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",
-
-    // Modelo de IA a usar
-    modelo: "qwen/qwen3-32b",
-
-    // Temperatura: 0.1 = preciso, 0.9 = criativo
-    temperatura: 0.6,
-
-    // Máximo de tokens na resposta
-    maxTokens: 1000,
+    get token() { return CONFIG.ia.groq.token; },
+    get modelo() { return CONFIG.ia.groq.modelo; },
+    get temperatura() { return CONFIG.ia.groq.temperatura; },
+    get maxTokens() { return CONFIG.ia.groq.maxTokens; },
   },
 
   // 🌐 URLs do sistema

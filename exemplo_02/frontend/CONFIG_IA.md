@@ -1,13 +1,13 @@
 ﻿# ============================================
 # ðŸ¤– CONFIGURAÃ‡ÃƒO DE IA
 # ============================================
-# Copie este arquivo para .env e preencha
+# Edite diretamente no config.js
 
 # Provider de IA: 'groq' ou 'gemini'
-VITE_IA_PROVIDER=groq
+# Altere em: frontend/config.js -> ia.provider
 
 # Token Groq (obter em: https://console.groq.com/)
-VITE_GROQ_API_KEY=
+# Altere em: frontend/config.js -> ia.groq.token
 
 # Token Gemini (obter em: https://aistudio.google.com/app/apikey)
-VITE_GEMINI_API_KEY=
+# Altere em: frontend/config.js -> ia.gemini.token

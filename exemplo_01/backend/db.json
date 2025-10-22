@@ -107,39 +107,6 @@
       "description": "Teclado mecânico com switches Cherry MX, iluminação RGB personalizável e teclas programáveis",
       "stock": 52,
       "createdAt": "2024-04-01T09:20:00Z"
-    },
-    {
-      "name": "Teste Via API",
-      "price": 88.88,
-      "category": "Teste",
-      "description": "Produto de teste via API direta",
-      "stock": 15,
-      "createdAt": "2025-10-21T17:00:00Z",
-      "id": 13
-    },
-    {
-      "name": "Produto Teste Postman",
-      "price": 199.99,
-      "category": "Eletrônicos",
-      "description": "Produto criado via Postman para testar API",
-      "stock": 25,
-      "id": 14
-    },
-    {
-      "name": "Teste",
-      "price": 100,
-      "category": "Informatica",
-      "description": "testando",
-      "stock": 10,
-      "id": 15
-    },
-    {
-      "name": "Teste Via tela",
-      "price": 100,
-      "category": "Teste",
-      "description": "esse é um teste via tela",
-      "stock": 10,
-      "id": 16
     }
   ],
   "sales": [
