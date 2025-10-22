@@ -41,3 +41,8 @@ coverage/
 # Plan files (can be committed if desired)
 *.plan.md
 
+# Kiro AI files
+.kiro/
+
+# Playwright MCP screenshots/artifacts
+.playwright-mcp/
