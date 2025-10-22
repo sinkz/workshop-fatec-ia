@@ -1,0 +1,14 @@
+{
+  "name": "mcp-client-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cliente MCP simples para demonstração educacional",
+  "main": "client.js",
+  "scripts": {
+    "start": "node client.js",
+    "demo": "node client.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  }
+}

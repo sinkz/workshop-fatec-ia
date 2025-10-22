@@ -1,0 +1,11 @@
+{
+  "name": "frontend-produtos-simples",
+  "version": "1.0.0",
+  "description": "Frontend ultra-simples para workshop MCP",
+  "scripts": {
+    "start": "http-server -p 3000 -o -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

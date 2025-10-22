@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Produtos + Chat IA</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>🛍️ Sistema de Produtos com IA</h1>
+      <p>Workshop MCP - Exemplo Simplificado</p>
+    </header>
+
+    <!-- Container principal: Split Screen -->
+    <div class="container">
+      <!-- ========== LADO ESQUERDO: LISTA DE PRODUTOS ========== -->
+      <div class="produtos-section">
+        <div class="section-header">
+          <h2>📦 Produtos</h2>
+          <button onclick="carregarProdutos()" class="btn-refresh">
+            🔄 Atualizar
+          </button>
+        </div>
+
+        <div id="produtos-lista" class="produtos-lista">
+          <p class="loading">Carregando produtos...</p>
+        </div>
+      </div>
+
+      <!-- ========== LADO DIREITO: CHAT IA ========== -->
+      <div class="chat-section">
+        <div class="section-header">
+          <h2>💬 Chat IA</h2>
+          <button onclick="limparChat()" class="btn-clear">🗑️ Limpar</button>
+        </div>
+
+        <div id="chat-mensagens" class="chat-mensagens">
+          <!-- Mensagens aparecem aqui -->
+        </div>
+
+        <div class="chat-input-container">
+          <input
+            type="text"
+            id="chat-input"
+            placeholder="Digite sua pergunta sobre produtos..."
+            onkeypress="handleKeyPress(event)"
+          />
+          <button onclick="enviarMensagem()" class="btn-send">📤 Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

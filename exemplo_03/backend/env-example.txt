@@ -1,0 +1,17 @@
+# 🔐 CONFIGURAÇÃO DO NEON DATABASE
+#
+# Como obter essas credenciais:
+# 1. Crie uma conta gratuita em https://neon.tech
+# 2. Crie um novo projeto
+# 3. No dashboard, clique em "Connection String"
+# 4. Copie a connection string completa
+# 5. API Key: Settings → API Keys → Generate New Key
+#
+# ⚠️ RENOMEIE ESTE ARQUIVO PARA .env
+
+# Connection String do Neon (PostgreSQL)
+NEON_DATABASE_URL="postgresql://user:password@ep-xxx-xxx.neon.tech/receitas?sslmode=require"
+
+# API Key do Neon (para operações administrativas)
+NEON_API_KEY="seu_api_key_neon_aqui"
+

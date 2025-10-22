@@ -1,0 +1,323 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Smartphone Galaxy Pro",
+      "price": 1299.99,
+      "category": "Eletrônicos",
+      "description": "Smartphone premium com câmera de 108MP, 256GB de armazenamento e tela AMOLED de 6.7 polegadas",
+      "stock": 45,
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Notebook UltraBook Air",
+      "price": 2499.9,
+      "category": "Informática",
+      "description": "Notebook ultrafino com processador Intel i7, 16GB RAM, SSD 512GB e tela 14 polegadas",
+      "stock": 23,
+      "createdAt": "2024-01-20T14:15:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Fone Bluetooth Premium",
+      "price": 299.99,
+      "category": "Áudio",
+      "description": "Fone de ouvido sem fio com cancelamento de ruído ativo e bateria de 30 horas",
+      "stock": 78,
+      "createdAt": "2024-02-01T09:45:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Smart TV 55\" 4K",
+      "price": 1899,
+      "category": "Eletrônicos",
+      "description": "Smart TV LED 55 polegadas com resolução 4K, HDR e sistema operacional Android TV",
+      "stock": 12,
+      "createdAt": "2024-02-10T16:20:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Tablet Pro 12.9\"",
+      "price": 1599.99,
+      "category": "Informática",
+      "description": "Tablet profissional com tela de 12.9 polegadas, processador M2 e suporte à Apple Pencil",
+      "stock": 34,
+      "createdAt": "2024-02-15T11:30:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Smartwatch Fitness",
+      "price": 449.9,
+      "category": "Wearables",
+      "description": "Relógio inteligente com monitoramento de saúde, GPS e resistência à água",
+      "stock": 67,
+      "createdAt": "2024-03-01T08:15:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Câmera DSLR Profissional",
+      "price": 3299.99,
+      "category": "Fotografia",
+      "description": "Câmera DSLR com sensor full-frame, 45MP e gravação de vídeo 4K",
+      "stock": 8,
+      "createdAt": "2024-03-05T13:45:00Z"
+    },
+    {
+      "id": 8,
+      "name": "Console Gaming Next-Gen",
+      "price": 2199,
+      "category": "Games",
+      "description": "Console de videogame de nova geração com SSD ultra-rápido e suporte a 4K/120fps",
+      "stock": 19,
+      "createdAt": "2024-03-10T15:30:00Z"
+    },
+    {
+      "id": 9,
+      "name": "Drone 4K Pro",
+      "price": 1799.99,
+      "category": "Fotografia",
+      "description": "Drone profissional com câmera 4K, gimbal de 3 eixos e autonomia de 30 minutos",
+      "stock": 15,
+      "createdAt": "2024-03-15T10:00:00Z"
+    },
+    {
+      "id": 10,
+      "name": "Caixa de Som Bluetooth",
+      "price": 199.9,
+      "category": "Áudio",
+      "description": "Caixa de som portátil com som 360°, resistente à água e bateria de 12 horas",
+      "stock": 89,
+      "createdAt": "2024-03-20T12:15:00Z"
+    },
+    {
+      "id": 11,
+      "name": "Monitor Gamer 27\" 144Hz",
+      "price": 899.99,
+      "category": "Informática",
+      "description": "Monitor gamer com tela de 27 polegadas, taxa de atualização de 144Hz e tecnologia G-Sync",
+      "stock": 28,
+      "createdAt": "2024-03-25T14:30:00Z"
+    },
+    {
+      "id": 12,
+      "name": "Teclado Mecânico RGB",
+      "price": 349.9,
+      "category": "Informática",
+      "description": "Teclado mecânico com switches Cherry MX, iluminação RGB personalizável e teclas programáveis",
+      "stock": 52,
+      "createdAt": "2024-04-01T09:20:00Z"
+    },
+    {
+      "name": "Teste Via API",
+      "price": 88.88,
+      "category": "Teste",
+      "description": "Produto de teste via API direta",
+      "stock": 15,
+      "createdAt": "2025-10-21T17:00:00Z",
+      "id": 13
+    },
+    {
+      "name": "Produto Teste Postman",
+      "price": 199.99,
+      "category": "Eletrônicos",
+      "description": "Produto criado via Postman para testar API",
+      "stock": 25,
+      "id": 14
+    },
+    {
+      "name": "Teste",
+      "price": 100,
+      "category": "Informatica",
+      "description": "testando",
+      "stock": 10,
+      "id": 15
+    },
+    {
+      "name": "Teste Via tela",
+      "price": 100,
+      "category": "Teste",
+      "description": "esse é um teste via tela",
+      "stock": 10,
+      "id": 16
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "productId": 1,
+      "quantity": 2,
+      "totalPrice": 2599.98,
+      "customerName": "João Silva",
+      "saleDate": "2024-04-01T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "productId": 3,
+      "quantity": 1,
+      "totalPrice": 299.99,
+      "customerName": "Maria Santos",
+      "saleDate": "2024-04-01T14:15:00Z"
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "quantity": 1,
+      "totalPrice": 2499.9,
+      "customerName": "Pedro Oliveira",
+      "saleDate": "2024-04-02T09:45:00Z"
+    },
+    {
+      "id": 4,
+      "productId": 6,
+      "quantity": 3,
+      "totalPrice": 1349.7,
+      "customerName": "Ana Costa",
+      "saleDate": "2024-04-02T16:20:00Z"
+    },
+    {
+      "id": 5,
+      "productId": 10,
+      "quantity": 2,
+      "totalPrice": 399.8,
+      "customerName": "Carlos Ferreira",
+      "saleDate": "2024-04-03T11:30:00Z"
+    },
+    {
+      "id": 6,
+      "productId": 4,
+      "quantity": 1,
+      "totalPrice": 1899,
+      "customerName": "Lucia Mendes",
+      "saleDate": "2024-04-03T15:45:00Z"
+    },
+    {
+      "id": 7,
+      "productId": 5,
+      "quantity": 1,
+      "totalPrice": 1599.99,
+      "customerName": "Roberto Lima",
+      "saleDate": "2024-04-04T08:15:00Z"
+    },
+    {
+      "id": 8,
+      "productId": 12,
+      "quantity": 2,
+      "totalPrice": 699.8,
+      "customerName": "Fernanda Rocha",
+      "saleDate": "2024-04-04T13:30:00Z"
+    },
+    {
+      "id": 9,
+      "productId": 8,
+      "quantity": 1,
+      "totalPrice": 2199,
+      "customerName": "Marcos Alves",
+      "saleDate": "2024-04-05T10:00:00Z"
+    },
+    {
+      "id": 10,
+      "productId": 11,
+      "quantity": 1,
+      "totalPrice": 899.99,
+      "customerName": "Juliana Barbosa",
+      "saleDate": "2024-04-05T14:45:00Z"
+    },
+    {
+      "id": 11,
+      "productId": 7,
+      "quantity": 1,
+      "totalPrice": 3299.99,
+      "customerName": "Ricardo Souza",
+      "saleDate": "2024-04-06T09:20:00Z"
+    },
+    {
+      "id": 12,
+      "productId": 1,
+      "quantity": 1,
+      "totalPrice": 1299.99,
+      "customerName": "Camila Torres",
+      "saleDate": "2024-04-06T16:10:00Z"
+    },
+    {
+      "id": 13,
+      "productId": 9,
+      "quantity": 1,
+      "totalPrice": 1799.99,
+      "customerName": "Bruno Cardoso",
+      "saleDate": "2024-04-07T11:25:00Z"
+    },
+    {
+      "id": 14,
+      "productId": 3,
+      "quantity": 4,
+      "totalPrice": 1199.96,
+      "customerName": "Patrícia Dias",
+      "saleDate": "2024-04-07T15:40:00Z"
+    },
+    {
+      "id": 15,
+      "productId": 6,
+      "quantity": 2,
+      "totalPrice": 899.8,
+      "customerName": "Gustavo Pereira",
+      "saleDate": "2024-04-08T08:50:00Z"
+    },
+    {
+      "id": 16,
+      "productId": 10,
+      "quantity": 5,
+      "totalPrice": 999.5,
+      "customerName": "Isabela Martins",
+      "saleDate": "2024-04-08T12:35:00Z"
+    },
+    {
+      "id": 17,
+      "productId": 2,
+      "quantity": 1,
+      "totalPrice": 2499.9,
+      "customerName": "Diego Nascimento",
+      "saleDate": "2024-04-09T10:15:00Z"
+    },
+    {
+      "id": 18,
+      "productId": 4,
+      "quantity": 2,
+      "totalPrice": 3798,
+      "customerName": "Renata Campos",
+      "saleDate": "2024-04-09T14:20:00Z"
+    },
+    {
+      "id": 19,
+      "productId": 12,
+      "quantity": 1,
+      "totalPrice": 349.9,
+      "customerName": "Thiago Moreira",
+      "saleDate": "2024-04-10T09:05:00Z"
+    },
+    {
+      "id": 20,
+      "productId": 5,
+      "quantity": 2,
+      "totalPrice": 3199.98,
+      "customerName": "Vanessa Ribeiro",
+      "saleDate": "2024-04-10T16:55:00Z"
+    },
+    {
+      "id": 21,
+      "productId": 8,
+      "quantity": 1,
+      "totalPrice": 2199,
+      "customerName": "Alexandre Santos",
+      "saleDate": "2024-04-11T11:40:00Z"
+    },
+    {
+      "id": 22,
+      "productId": 11,
+      "quantity": 2,
+      "totalPrice": 1799.98,
+      "customerName": "Larissa Gomes",
+      "saleDate": "2024-04-11T15:25:00Z"
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+# 🛒 Sistema de Vendas com MCP + Chat IA
+
+> **Sistema completo de vendas integrado com Model Context Protocol (MCP) e chat inteligente usando Groq.ai**
+
+[![Status](https://img.shields.io/badge/Status-Completo-brightgreen)]()
+[![MCP](https://img.shields.io/badge/MCP-12%20Tools-blue)]()
+[![Frontend](https://img.shields.io/badge/Frontend-React%2018-61dafb)]()
+[![Backend](https://img.shields.io/badge/Backend-Express-green)]()
+
+## 🎯 Visão Geral
+
+Este projeto demonstra uma implementação completa de um sistema de vendas moderno com chat inteligente, utilizando o **Model Context Protocol (MCP)** para conectar uma IA (Groq.ai) com dados reais de produtos e vendas.
+
+### ✨ Principais Características
+
+- 🤖 **Chat IA Integrado** - Groq.ai com acesso a dados reais via MCP
+- 📦 **Gestão Completa** - Produtos, vendas, estoque e analytics
+- 🛡️ **Anti-Alucinação** - Sistema robusto para prevenir dados inventados
+- 🔧 **12 Ferramentas MCP** - Operações especializadas em português
+- 🎨 **Interface Moderna** - React 18 + TypeScript + Tailwind CSS
+- 📊 **Analytics Real-time** - Métricas e relatórios automáticos
+
+## 🏗️ Arquitetura do Sistema
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   MCP Server    │
+│   React + TS    │◄──►│   Express +     │◄──►│   12 Tools      │
+│   Chat Interface│    │   JSON Server   │    │   Sales Context │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Groq.ai API   │    │   Database      │    │   API Client    │
+│   LLM Processing│    │   Products +    │    │   HTTP Requests │
+│   Anti-halluc.  │    │   Sales Data    │    │   Error Handling│
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+## 🚀 Quick Start
+
+### Pré-requisitos
+
+- Node.js 18+
+- Token Groq.ai ([Obter aqui](https://console.groq.com/))
+
+### Instalação Rápida
+
+```bash
+# 1. Clone o repositório
+git clone <repo-url>
+cd exemplo_01
+
+# 2. Instale todas as dependências
+# Backend
+cd backend && npm install
+
+# MCP Server
+cd ../mcp-server && npm install
+
+# Frontend
+cd ../frontend && npm install
+
+# 3. Configure o token Groq
+cd frontend
+cp .env.example .env
+# Edite .env e adicione seu VITE_GROQ_API_KEY
+
+# 4. Execute tudo (3 terminais)
+# Terminal 1: cd backend && npm run dev
+# Terminal 2: cd mcp-server && npm run dev
+# Terminal 3: cd frontend && npm run dev
+```
+
+### Acesso
+
+- 🌐 **Frontend:** http://localhost:3000
+- 🔌 **Backend API:** http://localhost:3001
+- ⚙️ **MCP Server:** Ativo via stdio
+
+## 🎮 Como Usar
+
+### 1. 📦 Gestão de Produtos
+
+- Navegue para **Produtos**
+- Visualize, crie, edite produtos
+- Controle estoque em tempo real
+- Filtre por categoria, preço, estoque
+
+### 2. 💰 Controle de Vendas
+
+- Acesse **Vendas**
+- Registre novas vendas
+- Visualize analytics automáticos
+- Acompanhe métricas de performance
+
+### 3. 🤖 Chat Inteligente
+
+- Vá para **Chat IA**
+- Faça perguntas naturais:
+  - _"Quantos produtos temos em estoque?"_
+  - _"Mostre as vendas de hoje"_
+  - _"Crie um produto chamado Smartphone Pro"_
+  - _"Qual categoria vende mais?"_
+
+## 🛠️ Ferramentas MCP Disponíveis
+
+| 🔧 Ferramenta             | 📝 Descrição               | 💬 Exemplo de Uso            |
+| ------------------------- | -------------------------- | ---------------------------- |
+| `listar_produtos`         | Lista produtos com filtros | "Produtos em estoque baixo"  |
+| `buscar_produto`          | Busca produto específico   | "Detalhes do produto ID 5"   |
+| `criar_produto`           | Adiciona novo produto      | "Crie um notebook gamer"     |
+| `atualizar_produto`       | Modifica produto existente | "Atualize preço para R$ 299" |
+| `listar_vendas`           | Histórico de vendas        | "Vendas da última semana"    |
+| `criar_venda`             | Registra nova venda        | "Venda 2 smartphones"        |
+| `analisar_vendas`         | Métricas e relatórios      | "Relatório por categoria"    |
+| `resumo_inventario`       | Status do estoque          | "Produtos com estoque baixo" |
+| `listar_categorias`       | Categorias disponíveis     | "Quais categorias temos?"    |
+| `atualizar_estoque`       | Controle de estoque        | "Adicione 10 unidades"       |
+| `verificar_saude_sistema` | Status do sistema          | "Sistema funcionando?"       |
+
+## 🎓 Para Educadores e Alunos
+
+### 📚 Material Educacional Incluído
+
+- 📖 **[Setup Completo](./SETUP_COMPLETO.md)** - Guia passo a passo
+- 🎓 **[Roadmap Educacional](./docs/ROADMAP_EDUCACIONAL.md)** - Plano de aulas
+- 👨‍🎓 **[Guia dos Alunos](./docs/GUIA_ALUNOS.md)** - Manual simplificado
+- 🛠️ **[Exercícios Práticos](./docs/EXERCICIOS_PRATICOS.md)** - Atividades hands-on
+- 🏛️ **[Arquitetura Educacional](./mcp-server/ARQUITETURA_EDUCACIONAL.md)** - Conceitos MCP
+- ⚙️ **[Configuração Única](./frontend/src/config/config-alunos.ts)** - Arquivo único para alunos
+
+### 🎯 Exercícios Sugeridos
+
+1. **Personalização do Chat:**
+
+   ```typescript
+   // Edite: frontend/src/config/config-alunos.ts
+   export const PROMPT_SISTEMA = `
+   Você é um assistente especializado em...
+   `;
+   ```
+
+2. **Novas Ferramentas MCP:**
+
+   - Adicione ferramenta de desconto
+   - Crie relatórios personalizados
+   - Implemente busca avançada
+
+3. **Interface Personalizada:**
+   - Modifique cores e temas
+   - Adicione novos componentes
+   - Implemente funcionalidades extras
+
+### 🔧 Configuração Ultra Simples para Alunos
+
+**TUDO EM UM ARQUIVO:** Apenas IA e MCP - sem distrações!
+
+Alunos modificam **apenas UM arquivo**:
+
+```typescript
+// frontend/src/config/config-alunos.ts
+
+export const CONFIG_ALUNOS = {
+  // 🤖 Personalidade da IA
+  nome: "Assistente de Vendas",
+  personalidade: "profissional e amigável",
+
+  // 🚀 Configuração Groq.ai
+  groq: {
+    modelo: "llama3-8b-8192", // Experimente outros!
+    temperatura: 0.1, // Ajuste criatividade!
+  },
+
+  // 🔌 Conexão MCP
+  mcp: {
+    url: "http://localhost:3003", // Dados reais!
+  },
+
+  // 💬 Prompt principal - AQUI É A MÁGICA!
+  prompt: `Você é um assistente especializado...`,
+
+  // 👋 Mensagem de boas-vindas
+  boasVindas: `👋 Olá! Sou seu Assistente...`,
+};
+```
+
+**Todas as outras configurações estão integradas no código.**
+
+## 📊 Dados de Exemplo
+
+O sistema vem pré-carregado com:
+
+- ✅ **15 produtos** realistas em 5 categorias
+- ✅ **25 vendas** com dados históricos
+- ✅ **Métricas** calculadas automaticamente
+- ✅ **Analytics** em tempo real
+
+## 🔧 Stack Tecnológico
+
+### Frontend
+
+- **React 18** - Interface moderna
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização utilitária
+- **React Query** - Gerenciamento de estado
+- **React Router** - Navegação
+- **Zod** - Validação de dados
+
+### Backend
+
+- **Express.js** - Servidor web
+- **JSON Server** - Database simulado
+- **CORS** - Configuração de segurança
+- **Morgan** - Logging de requisições
+
+### MCP & IA
+
+- **MCP SDK** - Protocol implementation
+- **Groq.ai** - Processamento de linguagem
+- **Winston** - Logging estruturado
+- **Axios** - Cliente HTTP
+
+## 🐛 Solução de Problemas
+
+### ❌ Problemas Comuns
+
+| Problema                   | Solução                                           |
+| -------------------------- | ------------------------------------------------- |
+| Token Groq não configurado | Configure `VITE_GROQ_API_KEY` no `.env`           |
+| MCP Server não conecta     | Verifique se está rodando: `npm run dev`          |
+| API não responde           | Teste: `curl http://localhost:3001/health`        |
+| Frontend não carrega       | Limpe cache: `rm -rf node_modules && npm install` |
+
+### 🔍 Debug
+
+```bash
+# Verificar logs
+tail -f backend/logs/app.log
+tail -f mcp-server/logs/mcp-combined.log
+
+# Testar componentes
+curl http://localhost:3001/api/products
+echo '{"method": "tools/list"}' | cd mcp-server && npm run dev
+```
+
+## 📈 Status do Desenvolvimento
+
+- ✅ **Backend API** - Completo com 15 endpoints
+- ✅ **MCP Server** - 12 ferramentas funcionais
+- ✅ **Frontend React** - Interface completa
+- ✅ **Chat Integrado** - Groq + MCP funcionando
+- ✅ **Anti-Alucinação** - Sistema robusto implementado
+- ✅ **Error Handling** - Tratamento completo de erros
+- ✅ **Documentação** - Guias detalhados
+- ✅ **Testes** - Validação de componentes
+
+## 🤝 Contribuição
+
+Este projeto é educacional. Para contribuir:
+
+1. Fork o repositório
+2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
+3. Commit: `git commit -m 'Adiciona nova funcionalidade'`
+4. Push: `git push origin feature/nova-funcionalidade`
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto é licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## 🆘 Suporte
+
+Precisa de ajuda?
+
+1. 📖 Consulte o [Setup Completo](./SETUP_COMPLETO.md)
+2. 🔍 Verifique os logs nos terminais
+3. 🐛 Abra uma [Issue](./issues) com detalhes
+4. 💬 Participe das [Discussions](./discussions)
+
+---
+
+<div align="center">
+
+**🎉 Sistema pronto para uso educacional e demonstrações!**
+
+[📖 Documentação](./SETUP_COMPLETO.md) • [🏛️ Arquitetura](./mcp-server/ARQUITETURA_EDUCACIONAL.md) • [⚙️ Configuração](./frontend/src/config/)
+
+</div>
