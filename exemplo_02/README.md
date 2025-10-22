@@ -15,6 +15,8 @@ Este é um exemplo **ULTRA-SIMPLIFICADO** de um sistema com:
 
 **Objetivo:** Ensinar conceitos MCP sem complexidade técnica.
 
+> 📊 **[Ver Diagrama de Fluxo →](./FLUXO.md)** - Entenda a arquitetura simplificada
+
 ---
 
 ## 🚀 Quick Start

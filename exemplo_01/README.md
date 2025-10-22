@@ -12,6 +12,8 @@
 
 Este projeto demonstra uma implementação completa de um sistema de vendas moderno com chat inteligente, utilizando o **Model Context Protocol (MCP)** para conectar uma IA (Groq.ai ou Google Gemini) com dados reais de produtos e vendas.
 
+> 📊 **[Ver Diagrama de Fluxo →](./FLUXO.md)** - Visualize como os componentes se comunicam
+
 ### ✨ Principais Características
 
 - 🤖 **Chat IA Multi-Provider** - Suporte a Groq.ai e Google Gemini
