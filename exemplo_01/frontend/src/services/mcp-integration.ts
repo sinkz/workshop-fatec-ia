@@ -1,10 +1,10 @@
 /**
- * 🔌 INTEGRAÇÃO MCP + GROQ SIMPLIFICADA PARA ALUNOS
+ * 🔌 INTEGRAÇÃO MCP + IA SIMPLIFICADA PARA ALUNOS
  *
- * Integração simples entre Groq.ai e MCP para o chat inteligente
+ * Integração simples entre IA (Groq/Gemini) e MCP para o chat inteligente
  */
 
-import GroqClientSimples from "./groq-client";
+import { criarProviderIA, IAProvider } from "./ia-provider";
 import MCPClientSimples from "./mcp";
 import { FERRAMENTAS_MCP } from "./mcp-tools-definitions";
 
@@ -24,13 +24,13 @@ export interface RespostaChatMCP {
 // ============================================================================
 
 export class ChatMCPIntegrado {
-  private groqClient: GroqClientSimples;
+  private iaProvider: IAProvider;
   private mcpClient: MCPClientSimples;
   private mcpConectado: boolean = false;
   private onStatusChange?: (status: boolean) => void;
 
   constructor(onStatusChange?: (status: boolean) => void) {
-    this.groqClient = new GroqClientSimples();
+    this.iaProvider = criarProviderIA();
     this.mcpClient = new MCPClientSimples();
     this.onStatusChange = onStatusChange;
     this.inicializarMCP();
@@ -73,16 +73,16 @@ export class ChatMCPIntegrado {
       console.log("💬 Processando mensagem:", mensagem);
 
       // SEMPRE enviar com ferramentas disponíveis
-      // O Groq decide se precisa usar ou não
-      const resposta = await this.groqClient.enviarMensagem(
+      // A IA decide se precisa usar ou não
+      const resposta = await this.iaProvider.enviarMensagem(
         mensagem,
         FERRAMENTAS_MCP
       );
 
-      // Se Groq pediu para executar ferramentas
+      // Se IA pediu para executar ferramentas
       if (resposta.precisaExecutarTools && resposta.toolCalls) {
         console.log(
-          "🔧 Groq solicitou executar",
+          "🔧 IA solicitou executar",
           resposta.toolCalls.length,
           "ferramentas"
         );
@@ -149,18 +149,18 @@ export class ChatMCPIntegrado {
           resultado.sucesso ? "Sucesso" : resultado.erro
         );
 
-        // Adicionar resultado ao histórico do Groq
-        this.groqClient.adicionarResultadoFerramenta(
+        // Adicionar resultado ao histórico da IA
+        this.iaProvider.adicionarResultadoFerramenta(
           toolCall.id,
           nomeFerramenta,
           resultado.sucesso ? resultado.dados : { erro: resultado.erro }
         );
       }
 
-      // Enviar de volta para Groq para gerar resposta final
-      console.log("🤖 Enviando resultados para Groq gerar resposta final...");
-      const respostaFinal = await this.groqClient.enviarMensagem(
-        "", // Mensagem vazia, Groq usa histórico
+      // Enviar de volta para IA para gerar resposta final
+      console.log("🤖 Enviando resultados para IA gerar resposta final...");
+      const respostaFinal = await this.iaProvider.enviarMensagem(
+        "", // Mensagem vazia, IA usa histórico
         FERRAMENTAS_MCP
       );
 
@@ -202,8 +202,8 @@ export class ChatMCPIntegrado {
    * Limpar histórico de conversas
    */
   limparHistorico(): void {
-    this.groqClient.limparHistorico();
-    console.log("🗑️ Histórico do Groq limpo");
+    this.iaProvider.limparHistorico();
+    console.log("🗑️ Histórico da IA limpo");
   }
 }
 
@@ -231,6 +231,12 @@ export class ChatMCPIntegrado {
  * - Integra dados reais nas respostas da IA
  * - Fallback para resposta sem MCP se necessário
  * - Configurações vêm do config-alunos.ts
+ * - Suporta múltiplos providers (Groq, Gemini) via ia-provider
+ *
+ * TROCAR PROVIDER:
+ * - Mude VITE_IA_PROVIDER no .env (groq ou gemini)
+ * - Configure o token correspondente
+ * - Recarregue a página
  */
 
 export default ChatMCPIntegrado;

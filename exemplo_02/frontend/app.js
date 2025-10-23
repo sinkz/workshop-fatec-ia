@@ -6,6 +6,9 @@
  * - Chat com Groq.ai + Function Calling
  */
 
+// ========== IMPORTAR CONFIGURAÇÃO ==========
+import CONFIG from "./config.js";
+
 // ========== FERRAMENTAS DISPONÍVEIS PARA O GROQ ==========
 /**
  * 🛠️ POR QUE DEFINIMOS FERRAMENTAS?
@@ -624,6 +627,12 @@ function handleKeyPress(event) {
     enviarMensagem();
   }
 }
+
+// ========== EXPOR FUNÇÕES GLOBALMENTE (para onclick do HTML) ==========
+window.carregarProdutos = carregarProdutos;
+window.enviarMensagem = enviarMensagem;
+window.limparChat = limparChat;
+window.handleKeyPress = handleKeyPress;
 
 // ========== INICIALIZAÇÃO ==========
 window.onload = async function () {

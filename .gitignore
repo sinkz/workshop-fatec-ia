@@ -13,6 +13,9 @@ out/
 .env.local
 .env.*.local
 
+# Permitir templates de ambiente
+!**/env.example
+
 # Logs
 logs/
 *.log

@@ -16,12 +16,42 @@ export const CONFIG_ALUNOS = {
   // Personalidade (seja criativo!)
   personalidade: "profissional e amigável",
 
-  // 🚀 CONFIGURAÇÃO GROQ.AI
+  // 🤖 CONFIGURAÇÃO DE IA - MULTI-PROVIDER
+  ia: {
+    // Provider ativo: 'groq' ou 'gemini'
+    provider: (import.meta.env.VITE_IA_PROVIDER || "groq") as "groq" | "gemini",
+
+    // Configuração Groq
+    groq: {
+      token: import.meta.env.VITE_GROQ_API_KEY || "configure-seu-token-no-env",
+      modelo: "qwen/qwen3-32b",
+      temperatura: 0.6,
+      maxTokens: 4096,
+    },
+
+    // Configuração Gemini
+    gemini: {
+      token: import.meta.env.VITE_GEMINI_API_KEY || "",
+      modelo: "gemini-2.0-flash-exp",
+      temperatura: 0.6,
+      maxTokens: 4096,
+    },
+  },
+
+  // 🚀 LEGADO: Mantido para compatibilidade (usa ia.groq)
   groq: {
-    token: import.meta.env.VITE_GROQ_API_KEY || "configure-seu-token-no-env",
-    modelo: "qwen/qwen3-32b", // Modelos válidos: 'qwen/qwen3-32b', 'mixtral-8x7b-32768', 'llama-3.3-70b-versatile'
-    temperatura: 0.6, // 0.1 = preciso, 0.9 = criativo
-    maxTokens: 4096, // Aumentado para aproveitar capacidade do Qwen
+    get token() {
+      return CONFIG_ALUNOS.ia.groq.token;
+    },
+    get modelo() {
+      return CONFIG_ALUNOS.ia.groq.modelo;
+    },
+    get temperatura() {
+      return CONFIG_ALUNOS.ia.groq.temperatura;
+    },
+    get maxTokens() {
+      return CONFIG_ALUNOS.ia.groq.maxTokens;
+    },
   },
 
   // 🔌 CONFIGURAÇÃO MCP (usa backend como proxy)
@@ -108,9 +138,19 @@ Como posso ajudar hoje?`,
 // ============================================================================
 
 // Verificar se token está configurado
-if (CONFIG_ALUNOS.groq.token === "configure-seu-token-no-env") {
+if (CONFIG_ALUNOS.ia.groq.token === "configure-seu-token-no-env") {
   console.warn("⚠️ ATENÇÃO: Configure seu token Groq no arquivo .env");
   console.warn("📝 Adicione: VITE_GROQ_API_KEY=seu_token_aqui");
+}
+
+// Verificar provider ativo
+console.log(`🤖 Provider ativo: ${CONFIG_ALUNOS.ia.provider.toUpperCase()}`);
+if (CONFIG_ALUNOS.ia.provider === "gemini" && !CONFIG_ALUNOS.ia.gemini.token) {
+  console.warn(
+    "⚠️ ATENÇÃO: Provider Gemini selecionado mas token não configurado"
+  );
+  console.warn("📝 Adicione: VITE_GEMINI_API_KEY=seu_token_aqui");
+  console.warn("💡 OU mude para Groq: VITE_IA_PROVIDER=groq");
 }
 
 export default CONFIG_ALUNOS;

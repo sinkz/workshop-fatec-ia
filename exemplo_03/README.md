@@ -19,6 +19,8 @@
 - ⚡ **Next.js 15** com **Server Actions** e **App Router**
 - 🎨 **UI Moderna** com Tailwind CSS e design culinário
 
+> 📊 **[Ver Diagrama de Fluxo →](./FLUXO.md)** - Veja como Next.js unifica tudo
+
 ### Funcionalidades
 
 #### CRUD Manual (UI Tradicional)

@@ -14,7 +14,36 @@
 
 export const appConfig = {
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // 🤖 CONFIGURAÇÃO DO CHAT IA (GROQ)
+  // 🤖 CONFIGURAÇÃO DE IA - MULTI-PROVIDER
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ia: {
+    /**
+     * 🔌 PROVIDER ATIVO
+     * 
+     * Opções: 'groq' ou 'gemini'
+     * Configure em .env.local: NEXT_PUBLIC_IA_PROVIDER
+     */
+    provider: (process.env.NEXT_PUBLIC_IA_PROVIDER || "groq") as "groq" | "gemini",
+
+    // Configuração Groq
+    groq: {
+      apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY || "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",
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      maxTokens: 2048,
+    },
+
+    // Configuração Gemini
+    gemini: {
+      apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
+      model: "gemini-1.5-flash",
+      temperature: 0.7,
+      maxTokens: 2048,
+    },
+  },
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // 🤖 CONFIGURAÇÃO LEGADO (COMPATIBILIDADE)
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   groq: {
     /**
@@ -26,9 +55,11 @@ export const appConfig = {
      * 3. Clique em "Create API Key"
      * 4. Dê um nome (ex: "workshop-fatec")
      * 5. Copie a chave gerada
-     * 6. Cole abaixo substituindo "COLE_SEU_TOKEN_GROQ_AQUI"
+     * 6. Adicione no .env.local: NEXT_PUBLIC_GROQ_API_KEY=sua_chave
      */
-    apiKey: "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",
+    get apiKey() {
+      return appConfig.ia.groq.apiKey;
+    },
 
     /**
      * 🧠 MODELO DE IA
@@ -42,7 +73,9 @@ export const appConfig = {
      * Não precisa alterar, mas pode testar outros modelos!
      */
 
-    model: "llama-3.3-70b-versatile",
+    get model() {
+      return appConfig.ia.groq.model;
+    },
 
     /**
      * 🌡️ TEMPERATURA
@@ -54,7 +87,9 @@ export const appConfig = {
      *
      * Para receitas, 0.7 é um bom balanço!
      */
-    temperature: 0.7,
+    get temperature() {
+      return appConfig.ia.groq.temperature;
+    },
 
     /**
      * 📏 TOKENS MÁXIMOS
@@ -62,7 +97,9 @@ export const appConfig = {
      * Limite de tokens na resposta da IA.
      * Quanto maior, mais longa a resposta pode ser.
      */
-    maxTokens: 2000,
+    get maxTokens() {
+      return appConfig.ia.groq.maxTokens;
+    },
   },
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
