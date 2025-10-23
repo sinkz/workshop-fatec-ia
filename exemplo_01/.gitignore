@@ -43,3 +43,6 @@ coverage/
 # Arquivos de lock (manter apenas um)
 package-lock.json
 yarn.lock
+
+# Garantir commit do env.example do frontend
+!frontend/env.example
