@@ -149,7 +149,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
      * Retorna o produto criado com ID
      */
     if (name === "criar_produto") {
-      const response = await axios.post(`${config.backendUrl}/produtos`, args);
+      // Converter strings para numbers se necessário (robustez)
+      const argsProcessados = {
+        nome: args.nome,
+        preco: typeof args.preco === "string" ? Number(args.preco) : args.preco,
+        categoria: args.categoria,
+      };
+      const response = await axios.post(
+        `${config.backendUrl}/produtos`,
+        argsProcessados
+      );
 
       console.error(`✅ Produto criado com sucesso: ID ${response.data.id}`);
 
@@ -325,7 +334,16 @@ httpApp.post("/tools/call", async (req, res) => {
         `✅ Ferramenta ${name} executada: ${result.length} produtos`
       );
     } else if (name === "criar_produto") {
-      const response = await axios.post(`${config.backendUrl}/produtos`, args);
+      // Converter strings para numbers se necessário (robustez)
+      const argsProcessados = {
+        nome: args.nome,
+        preco: typeof args.preco === "string" ? Number(args.preco) : args.preco,
+        categoria: args.categoria,
+      };
+      const response = await axios.post(
+        `${config.backendUrl}/produtos`,
+        argsProcessados
+      );
       result = response.data;
       console.error(`✅ Ferramenta ${name} executada: produto ID ${result.id}`);
     } else {

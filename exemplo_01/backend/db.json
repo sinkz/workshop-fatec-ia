@@ -115,6 +115,22 @@
       "description": "monitor gamer",
       "stock": 100,
       "id": 13
+    },
+    {
+      "name": "Monitor",
+      "price": 100,
+      "category": "Informática",
+      "description": "Esse é um otimo monitor",
+      "stock": 100,
+      "id": 14
+    },
+    {
+      "name": "Neosoro",
+      "price": 5,
+      "category": "Vicio",
+      "description": "Preciso muito disso",
+      "stock": 100,
+      "id": 15
     }
   ],
   "sales": [

@@ -29,27 +29,48 @@ const SYSTEM_PROMPT = `Você é um assistente especializado em receitas culinár
 Você tem acesso ao banco de dados de receitas através de ferramentas MCP do Neon Database.
 
 ## SUA MISSÃO:
-1. Ajudar usuários a explorar, buscar e criar receitas
-2. Usar ferramentas APENAS quando o usuário solicitar ações específicas
+1. Buscar receitas no banco de dados quando solicitado
+2. Sugerir novas receitas criativas quando solicitado
+3. SEMPRE distinguir entre BUSCAR (banco) vs CRIAR (nova receita)
 
-## QUANDO USAR FERRAMENTAS:
-✅ USE ferramentas quando o usuário:
-- Pedir para buscar receitas ("mostre receitas de bolo")
-- Quiser ver o que tem no banco ("quais receitas existem?")
-- Solicitar detalhes de uma receita específica
+## QUANDO USAR FERRAMENTAS (run_sql):
+✅ USE ferramentas SQL quando o usuário:
+- Quiser VER receitas que JÁ EXISTEM no banco
+- Usar verbos: "mostre", "liste", "busque", "encontre", "quais", "quantas"
+- Exemplos: "mostre receitas de bolo", "quais receitas doces tenho?", "liste todas as receitas"
+- Pedir detalhes de uma receita ESPECÍFICA por ID ou título
 
 ❌ NÃO USE ferramentas quando o usuário:
-- Enviar saudações ("oi", "olá", "tudo bem?")
-- Fizer perguntas genéricas ("o que você faz?")
-- Apenas conversar sem solicitar dados
+- Pedir para CRIAR/SUGERIR/INVENTAR uma receita NOVA
+- Usar verbos: "crie", "sugira", "invente", "me dê uma ideia"
+- Enviar saudações ou perguntas genéricas
+- Apenas conversar
 
-## IMPORTANTE SOBRE CRIAR RECEITAS:
-- NUNCA salve receitas diretamente no banco usando run_sql
-- Quando o usuário pedir uma receita nova, você DEVE:
-  1. Gerar uma receita criativa
-  2. SEMPRE incluir um bloco JSON no final da resposta com a receita estruturada
-  3. O JSON deve estar dentro de um code block: \`\`\`json { ... } \`\`\`
-  4. O usuário verá um botão para salvar ou apenas visualizar
+## REGRA CRÍTICA - BUSCAR vs CRIAR:
+🔍 BUSCAR no banco (usar run_sql):
+- "mostre receitas de bolo" → SELECT * FROM receitas WHERE titulo ILIKE '%bolo%'
+- "quais receitas eu tenho?" → SELECT * FROM receitas
+- "lista receitas doces" → SELECT * FROM receitas WHERE categoria = 'doce'
+- "busque torta de chocolate" → SELECT * FROM receitas WHERE titulo ILIKE '%torta%chocolate%'
+
+✨ CRIAR nova receita (SEM ferramenta, gerar JSON):
+- "sugira uma receita de bolo" → Gerar receita criativa com JSON
+- "crie uma receita vegana" → Gerar receita criativa com JSON
+- "me dê uma ideia de sobremesa" → Gerar receita criativa com JSON
+
+🎯 REGRAS IMPORTANTES PARA SQL:
+- SEMPRE use ILIKE (case-insensitive) ao invés de = para buscar por título
+- Use % para busca parcial: WHERE titulo ILIKE '%termo%'
+- Para múltiplas palavras: WHERE titulo ILIKE '%palavra1%' AND titulo ILIKE '%palavra2%'
+- Nunca use = para comparar títulos, apenas ILIKE
+
+## IMPORTANTE SOBRE CRIAR RECEITAS NOVAS:
+- NUNCA salve receitas diretamente no banco usando run_sql INSERT
+- Quando CRIAR uma receita nova, você DEVE:
+  1. Gerar uma receita criativa e original
+  2. SEMPRE incluir um bloco JSON no final da resposta
+  3. O JSON deve estar dentro de: \`\`\`json { ... } \`\`\`
+  4. O usuário verá um botão para salvar a receita no banco
 
 ## FORMATO OBRIGATÓRIO DA RESPOSTA PARA RECEITAS:
 
@@ -77,13 +98,31 @@ DIFICULDADE válidas: "facil", "medio", "dificil"
 ## EXEMPLOS DE CONVERSA:
 
 👤: "Oi!"
-🤖: Responde SEM usar ferramentas → "Olá! 👋 Sou o ReceitasIA, seu assistente de receitas! Posso te ajudar a buscar receitas no banco ou sugerir novas. O que você gostaria?"
+🤖: Responde SEM usar ferramentas → "Olá! 👋 Sou o ReceitasIA! Posso BUSCAR receitas que você já salvou no banco ou CRIAR receitas novas para você. O que prefere?"
 
-👤: "Quais receitas doces eu tenho?"
-🤖: USA ferramenta run_sql → "Encontrei X receitas doces: ..."
+👤: "Quais receitas doces eu tenho?" ← BUSCAR
+🤖: USA ferramenta run_sql → SELECT * FROM receitas WHERE categoria = 'doce' → "Encontrei 3 receitas doces no seu banco: ..."
 
-👤: "Me sugira uma receita de bolo de chocolate"
+👤: "Mostre receitas de bolo" ← BUSCAR
+🤖: USA ferramenta run_sql → SELECT * FROM receitas WHERE titulo ILIKE '%bolo%' → "Achei 2 receitas de bolo salvas: ..."
+
+👤: "Busque torta de chocolate" ← BUSCAR
+🤖: USA ferramenta run_sql → SELECT * FROM receitas WHERE titulo ILIKE '%torta%' AND titulo ILIKE '%chocolate%' → "Encontrei uma Torta de Chocolate! 🍫..."
+
+👤: "Me sugira uma receita de bolo de chocolate" ← CRIAR NOVA
 🤖: Gera receita SEM ferramentas → "Aqui está uma deliciosa receita de Bolo de Chocolate! 🍰 [texto explicativo] \`\`\`json { \"titulo\": \"Bolo de Chocolate\", ... } \`\`\`"
+
+👤: "Crie uma receita vegana para mim" ← CRIAR NOVA
+🤖: Gera receita SEM ferramentas → "Que tal essa receita vegana? 🌱 [texto] \`\`\`json { ... } \`\`\`"
+
+## REGRAS PARA CHAMAR FERRAMENTAS:
+- Números (tempo_preparo, porcoes) devem ser enviados como números, não strings
+- NÃO envie projectId - o sistema injeta automaticamente
+- Use ILIKE para buscas de texto: WHERE titulo ILIKE '%termo%'
+- Exemplos CORRETOS:
+  ✅ {"sql": "SELECT * FROM receitas WHERE titulo ILIKE '%bolo%'"}
+  ✅ {"sql": "SELECT * FROM receitas WHERE categoria = 'doce' LIMIT 10"}
+  ❌ {"sql": "SELECT * FROM receitas WHERE titulo = 'Bolo de Chocolate'", "projectId": "xxx"}
 
 ## ESTILO:
 - Seja amigável e use emojis relacionados a comida 🍰🍕🥗
@@ -153,6 +192,11 @@ export async function enviarMensagemGroq(
         properties: {},
       };
 
+      // Remover projectId dos campos obrigatórios (será injetado automaticamente)
+      const requiredFields = (paramsSchema.required || []).filter(
+        (field: string) => field !== "projectId"
+      );
+
       return {
         type: "function" as const,
         function: {
@@ -162,7 +206,7 @@ export async function enviarMensagemGroq(
           parameters: {
             type: "object",
             properties: paramsSchema.properties || {},
-            required: paramsSchema.required || [],
+            required: requiredFields,
           },
         },
       };
@@ -183,6 +227,9 @@ export async function enviarMensagemGroq(
       tool_choice: "auto",
       temperature: appConfig.groq.temperature,
       max_tokens: appConfig.groq.maxTokens,
+      top_p: 0.9,
+      frequency_penalty: 0.2,
+      presence_penalty: 0.0,
     });
 
     const toolsUsed: string[] = [];
@@ -242,21 +289,77 @@ export async function enviarMensagemGroq(
 
       // Adicionar tool calls e resultados ao histórico
       messages.push(response.choices[0].message as any);
-      messages.push(...(toolResults as any));
+      // Truncar conteúdo das tools para reduzir tokens
+      const toolResultsTrunc = toolResults.map((t) => ({
+        ...t,
+        content:
+          typeof t.content === "string" && t.content.length > 1200
+            ? t.content.slice(0, 1200) + "…"
+            : t.content,
+      }));
+      messages.push(...(toolResultsTrunc as any));
 
-      // Nova chamada à IA com os resultados dos tools
+      // Nova chamada à IA com os resultados dos tools – força finalização
       response = await groq.chat.completions.create({
         model: appConfig.groq.model,
         messages: messages as any,
         tools,
-        tool_choice: "auto",
+        tool_choice: "none",
         temperature: appConfig.groq.temperature,
         max_tokens: appConfig.groq.maxTokens,
+        top_p: 0.9,
+        frequency_penalty: 0.2,
+        presence_penalty: 0.0,
       });
     }
 
     // Resposta final da IA
     finalMessage = response.choices[0].message.content || "";
+
+    // 🔄 FALLBACK: Detectar tool calls no formato texto (compatibilidade com modelos antigos)
+    // Alguns modelos retornam: <function/run_sql>{"sql": "..."}</function>
+    if (
+      finalMessage.includes("<function/") &&
+      finalMessage.includes("</function>")
+    ) {
+      console.warn(
+        "⚠️ Modelo retornou tool call em formato texto. Use um modelo com melhor suporte a function calling."
+      );
+
+      // Extrair nome da função e argumentos
+      const match = finalMessage.match(
+        /<function\/(\w+)>(\{.*?\})<\/function>/
+      );
+      if (match) {
+        const [, toolName, argsJson] = match;
+        console.log(`🔧 Detectado tool call manual: ${toolName}`);
+
+        try {
+          const toolArgs = JSON.parse(argsJson);
+
+          // Injetar projectId se necessário
+          if (!toolArgs.projectId) {
+            toolArgs.projectId = appConfig.neon?.projectId || "auto";
+          }
+
+          const neonArgs = { params: toolArgs };
+          const result = await executarFerramentaMCP(toolName, neonArgs);
+
+          toolsUsed.push(toolName);
+
+          // Formatar resultado de forma amigável
+          if (Array.isArray(result)) {
+            finalMessage = `Encontrei ${
+              result.length
+            } receita(s):\n\n${JSON.stringify(result, null, 2)}`;
+          } else {
+            finalMessage = JSON.stringify(result, null, 2);
+          }
+        } catch (error: any) {
+          finalMessage = `Erro ao executar ferramenta: ${error.message}`;
+        }
+      }
+    }
 
     console.log("✅ Resposta da IA recebida");
     console.log("🔧 Tools usadas:", toolsUsed);

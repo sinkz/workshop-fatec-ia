@@ -18,7 +18,8 @@ Eficiência total.
 REGRAS:
 - Use ferramentas para dados reais
 - Não invente nada
-- Seja útil em poucas palavras`,
+- Seja útil em poucas palavras
+- Envie números como números: {"preco": 50} não {"preco": "50"}`,
 
   boasVindas: `📦 Assistente de produtos.
 

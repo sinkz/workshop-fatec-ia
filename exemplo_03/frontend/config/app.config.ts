@@ -19,18 +19,20 @@ export const appConfig = {
   ia: {
     /**
      * 🔌 PROVIDER ATIVO
-     * 
+     *
      * Opções: 'groq' ou 'gemini'
      * Configure em .env.local: NEXT_PUBLIC_IA_PROVIDER
      */
-    provider: (process.env.NEXT_PUBLIC_IA_PROVIDER || "groq") as "groq" | "gemini",
+    provider: (process.env.NEXT_PUBLIC_IA_PROVIDER || "groq") as
+      | "groq"
+      | "gemini",
 
     // Configuração Groq
     groq: {
-      apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY || "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",
-      model: "llama-3.3-70b-versatile",
-      temperature: 0.7,
-      maxTokens: 2048,
+      apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY || "",
+      model: "llama-3.3-70b-versatile", // TPM 12K Free, bom para SQL complexo
+      temperature: 0.6,
+      maxTokens: 1536, // Reduzir de 2048 para economizar TPM
     },
 
     // Configuração Gemini

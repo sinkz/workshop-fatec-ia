@@ -330,7 +330,7 @@ async function chamarGroqComFerramentas() {
         },
         body: JSON.stringify({
           model: CONFIG.groq.modelo,
-          messages: historicoGroq, // Histórico completo
+          messages: janelaHistorico(historicoGroq, 8), // janela deslizante
           tools:
             FERRAMENTAS_MCP_DINAMICAS.length > 0
               ? FERRAMENTAS_MCP_DINAMICAS // ← Usa ferramentas do MCP (se disponível)
@@ -338,6 +338,9 @@ async function chamarGroqComFerramentas() {
           tool_choice: "auto", // ← Deixa o Groq decidir
           temperature: CONFIG.groq.temperatura,
           max_tokens: CONFIG.groq.maxTokens,
+          top_p: 0.9,
+          frequency_penalty: 0.2,
+          presence_penalty: 0.0,
         }),
       }
     );
@@ -405,11 +408,20 @@ async function chamarGroqComFerramentas() {
          *
          * Com isso, Groq sabe o que aconteceu e pode gerar resposta adequada.
          */
+        const toolContent = (() => {
+          try {
+            const raw = JSON.stringify(resultado);
+            return raw.length > 1000 ? raw.slice(0, 1000) + "…" : raw;
+          } catch (e) {
+            return String(resultado);
+          }
+        })();
+
         historicoGroq.push({
           role: "tool",
           tool_call_id: toolCall.id, // Liga com a solicitação original
           name: nomeFerramenta,
-          content: JSON.stringify(resultado), // Resultado da execução
+          content: toolContent, // Resultado resumido
         });
       }
 
@@ -439,13 +451,17 @@ async function chamarGroqComFerramentas() {
           },
           body: JSON.stringify({
             model: CONFIG.groq.modelo,
-            messages: historicoGroq, // ← Agora TEM os resultados!
+            messages: janelaHistorico(historicoGroq, 8), // janela deslizante
             tools:
               FERRAMENTAS_MCP_DINAMICAS.length > 0
                 ? FERRAMENTAS_MCP_DINAMICAS // ← Usa ferramentas do MCP
                 : FERRAMENTAS_GROQ, // ← Fallback se MCP offline
+            tool_choice: "none", // ← Força resposta final, sem novas tools
             temperature: CONFIG.groq.temperatura,
             max_tokens: CONFIG.groq.maxTokens,
+            top_p: 0.9,
+            frequency_penalty: 0.2,
+            presence_penalty: 0.0,
           }),
         }
       );
@@ -619,6 +635,17 @@ function limparChat() {
   adicionarMensagem("assistant", CONFIG.boasVindas);
 
   console.log("🗑️ Chat limpo");
+}
+
+// ========== JANELA DESLIZANTE DO HISTÓRICO ==========
+function janelaHistorico(historico, ultimas) {
+  if (!Array.isArray(historico) || historico.length === 0) return [];
+  // manter a primeira mensagem do tipo system, se houver
+  const temSystem = historico[0] && historico[0].role === "system";
+  const system = temSystem ? [historico[0]] : [];
+  const resto = historico.slice(temSystem ? 1 : 0);
+  const janela = resto.slice(-ultimas);
+  return [...system, ...janela];
 }
 
 // ========== ENTER PARA ENVIAR ==========

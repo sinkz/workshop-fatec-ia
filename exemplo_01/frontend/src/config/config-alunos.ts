@@ -24,9 +24,9 @@ export const CONFIG_ALUNOS = {
     // Configuração Groq
     groq: {
       token: import.meta.env.VITE_GROQ_API_KEY || "configure-seu-token-no-env",
-      modelo: "qwen/qwen3-32b",
-      temperatura: 0.6,
-      maxTokens: 4096,
+      modelo: "meta-llama/llama-4-scout-17b-16e-instruct",
+      temperatura: 0.2,
+      maxTokens: 600,
     },
 
     // Configuração Gemini
@@ -77,6 +77,11 @@ REGRAS CRÍTICAS DE ANTI-ALUCINAÇÃO:
 - Quando criar/modificar algo, USE A FERRAMENTA APROPRIADA
 - NÃO mostre seu raciocínio interno (<think>), apenas a resposta final
 - Seja conciso e direto ao ponto
+
+REGRAS PARA CHAMAR FERRAMENTAS:
+- Números (id, price, quantidade, limiteEstoqueBaixo) devem ser enviados como números, não strings
+- Exemplo CORRETO: {"id": 5, "limiteEstoqueBaixo": 20}
+- Exemplo ERRADO: {"id": "5", "limiteEstoqueBaixo": "20"}
 
 IMPORTANTE: Você tem acesso a ferramentas que podem:
 - Listar produtos e vendas
