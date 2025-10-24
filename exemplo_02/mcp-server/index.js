@@ -172,6 +172,106 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       };
     }
 
+    // ===== FERRAMENTA 3: BUSCAR PRODUTO =====
+    /**
+     * GET /produtos/:id do backend
+     * Recebe argumentos: {id}
+     * Retorna o produto específico ou erro se não existir
+     */
+    if (name === "buscar_produto") {
+      const { id } = args;
+
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+
+      console.error(`🔍 Buscando produto ID ${idNumerico}`);
+
+      const response = await axios.get(
+        `${config.backendUrl}/produtos/${idNumerico}`
+      );
+
+      console.error(`✅ Produto ${idNumerico} encontrado:`, response.data.nome);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(response.data, null, 2),
+          },
+        ],
+      };
+    }
+
+    // ===== FERRAMENTA 4: EDITAR PRODUTO =====
+    /**
+     * PUT /produtos/:id do backend
+     * Recebe argumentos: {id, nome?, preco?, categoria?}
+     * Atualiza apenas os campos fornecidos
+     */
+    if (name === "editar_produto") {
+      const { id, nome, preco, categoria } = args;
+
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+
+      console.error(`📝 Editando produto ID ${idNumerico}`);
+      console.error(`   Novos dados:`, { nome, preco, categoria });
+
+      // Montar objeto apenas com campos fornecidos
+      const dadosAtualizacao = {};
+      if (nome) dadosAtualizacao.nome = nome;
+      if (preco)
+        dadosAtualizacao.preco =
+          typeof preco === "string" ? Number(preco) : preco;
+      if (categoria) dadosAtualizacao.categoria = categoria;
+
+      const response = await axios.put(
+        `${config.backendUrl}/produtos/${idNumerico}`,
+        dadosAtualizacao
+      );
+
+      console.error(`✅ Produto ${idNumerico} editado com sucesso`);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(response.data, null, 2),
+          },
+        ],
+      };
+    }
+
+    // ===== FERRAMENTA 5: EXCLUIR PRODUTO =====
+    /**
+     * DELETE /produtos/:id do backend
+     * Recebe argumentos: {id}
+     * Remove o produto permanentemente
+     */
+    if (name === "excluir_produto") {
+      const { id } = args;
+
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+
+      console.error(`🗑️  Excluindo produto ID ${idNumerico}`);
+
+      const response = await axios.delete(
+        `${config.backendUrl}/produtos/${idNumerico}`
+      );
+
+      console.error(`✅ Produto ${idNumerico} excluído com sucesso`);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(response.data, null, 2),
+          },
+        ],
+      };
+    }
+
     // ===== FERRAMENTA NÃO ENCONTRADA =====
     throw new Error(`Ferramenta "${name}" não existe`);
   } catch (error) {
@@ -346,6 +446,48 @@ httpApp.post("/tools/call", async (req, res) => {
       );
       result = response.data;
       console.error(`✅ Ferramenta ${name} executada: produto ID ${result.id}`);
+    } else if (name === "buscar_produto") {
+      const { id } = args;
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+      const response = await axios.get(
+        `${config.backendUrl}/produtos/${idNumerico}`
+      );
+      result = response.data;
+      console.error(`✅ Ferramenta ${name} executada: produto ${result.nome}`);
+    } else if (name === "editar_produto") {
+      const { id, nome, preco, categoria } = args;
+
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+
+      // Montar objeto apenas com campos fornecidos
+      const dadosAtualizacao = {};
+      if (nome) dadosAtualizacao.nome = nome;
+      if (preco)
+        dadosAtualizacao.preco =
+          typeof preco === "string" ? Number(preco) : preco;
+      if (categoria) dadosAtualizacao.categoria = categoria;
+
+      const response = await axios.put(
+        `${config.backendUrl}/produtos/${idNumerico}`,
+        dadosAtualizacao
+      );
+      result = response.data;
+      console.error(
+        `✅ Ferramenta ${name} executada: produto ID ${idNumerico} atualizado`
+      );
+    } else if (name === "excluir_produto") {
+      const { id } = args;
+      // Converter ID para número (aceita string ou number)
+      const idNumerico = typeof id === "string" ? parseInt(id, 10) : id;
+      const response = await axios.delete(
+        `${config.backendUrl}/produtos/${idNumerico}`
+      );
+      result = response.data;
+      console.error(
+        `✅ Ferramenta ${name} executada: produto ID ${idNumerico} excluído`
+      );
     } else {
       console.error(`❌ Ferramenta ${name} não encontrada`);
       return res
