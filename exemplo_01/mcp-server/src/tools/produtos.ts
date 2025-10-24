@@ -181,7 +181,9 @@ export const manipuladorBuscarProduto = (
   return async (argumentos) => {
     try {
       const { id } = argumentos;
-      const produto = await clienteApi.getProduct(id);
+      // Converter string para number se necessário (robustez)
+      const idNum = typeof id === "string" ? Number(id) : id;
+      const produto = await clienteApi.getProduct(idNum);
 
       return {
         content: [
@@ -267,12 +269,17 @@ export const manipuladorCriarProduto = (
     try {
       const { nome, preco, categoria, descricao, estoque } = argumentos;
 
+      // Converter strings para numbers se necessário (robustez)
+      const precoNum = typeof preco === "string" ? Number(preco) : preco;
+      const estoqueNum =
+        typeof estoque === "string" ? Number(estoque) : estoque;
+
       const produto = await clienteApi.createProduct({
         name: nome,
-        price: preco,
+        price: precoNum,
         category: categoria,
         description: descricao,
-        stock: estoque,
+        stock: estoqueNum,
       });
 
       return {
@@ -357,6 +364,9 @@ export const manipuladorAtualizarProduto = (
     try {
       const { id, ...atualizacoes } = argumentos;
 
+      // Converter id para number se necessário
+      const idNum = typeof id === "string" ? Number(id) : id;
+
       // Remove valores undefined para atualização parcial
       const atualizacoesLimpas = Object.fromEntries(
         Object.entries(atualizacoes).filter(([_, valor]) => valor !== undefined)
@@ -372,13 +382,19 @@ export const manipuladorAtualizarProduto = (
       };
 
       const atualizacoesApi = Object.fromEntries(
-        Object.entries(atualizacoesLimpas).map(([chave, valor]) => [
-          mapeamento[chave] || chave,
-          valor,
-        ])
+        Object.entries(atualizacoesLimpas).map(([chave, valor]) => {
+          const novaChave = mapeamento[chave] || chave;
+          // Converter números que possam vir como string
+          const novoValor =
+            (novaChave === "price" || novaChave === "stock") &&
+            typeof valor === "string"
+              ? Number(valor)
+              : valor;
+          return [novaChave, novoValor];
+        })
       );
 
-      const produto = await clienteApi.updateProduct(id, atualizacoesApi);
+      const produto = await clienteApi.updateProduct(idNum, atualizacoesApi);
 
       return {
         content: [

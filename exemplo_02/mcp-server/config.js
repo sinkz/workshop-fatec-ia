@@ -1,9 +1,10 @@
 /**
- * ⚙️ CONFIGURAÇÃO DO MCP SERVER
+ * ⚙️ CONFIGURAÇÃO DO MCP SERVER - ESQUELETO PARA O WORKSHOP
  *
  * Define as ferramentas (tools) e recursos (resources) disponíveis
  *
- * 👨‍🏫 EDITAR COM OS ALUNOS NO PROJETOR
+ * 👨‍🏫 CONSTRUIR COM OS ALUNOS NO PROJETOR
+ * 💡 DICA: Veja o arquivo cola/config.js para a versão completa
  */
 
 export default {
@@ -13,69 +14,30 @@ export default {
   // ========== FERRAMENTAS (TOOLS) ==========
   // Tools executam AÇÕES (listar, criar, modificar)
   ferramentas: [
-    {
-      name: "listar_produtos",
-      description: "Lista todos os produtos disponíveis no sistema",
-      inputSchema: {
-        type: "object",
-        properties: {},
-        required: [],
-      },
-    },
-    {
-      name: "criar_produto",
-      description: "Cria um novo produto no sistema",
-      inputSchema: {
-        type: "object",
-        properties: {
-          nome: {
-            type: "string",
-            description: "Nome do produto",
-          },
-          preco: {
-            type: "number",
-            description: "Preço do produto em reais",
-          },
-          categoria: {
-            type: "string",
-            description: "Categoria do produto (ex: Informática, Periféricos)",
-          },
-        },
-        required: ["nome", "preco", "categoria"],
-      },
-    },
+    // 👨‍🏫 FERRAMENTA 1: LISTAR PRODUTOS
+    // TODO: Adicionar configuração para listar_produtos
+    // name: "listar_produtos"
+    // description: "Lista todos os produtos..."
+    // inputSchema: sem propriedades, sem required
+
+    // 👨‍🏫 FERRAMENTA 2: CRIAR PRODUTO
+    // TODO: Adicionar configuração para criar_produto
+    // name: "criar_produto"
+    // description: "Cria um novo produto..."
+    // inputSchema properties: nome (string), preco (number), categoria (string)
+    // required: ["nome", "preco", "categoria"]
   ],
 
   // ========== RECURSOS (RESOURCES) ==========
   // Resources fornecem INFORMAÇÕES estáticas (documentação, guias)
   recursos: [
-    {
-      uri: "produtos://docs/guia",
-      nome: "Guia do Sistema de Produtos",
-      descricao: "Documentação sobre como usar o sistema",
-      tipoMime: "text/markdown",
-      conteudo: `# Guia do Sistema de Produtos
-
-## O que você pode fazer?
-
-- ✅ Listar todos os produtos
-- ✅ Criar novos produtos
-- ✅ Consultar informações via chat IA
-
-## Exemplos de uso no chat:
-
-- "Liste os produtos"
-- "Crie um produto chamado Webcam por R$ 200 na categoria Periféricos"
-- "Quantos produtos temos?"
-- "Qual o produto mais caro?"
-
-## Estrutura de um Produto:
-
-- **id**: Número único
-- **nome**: Nome do produto
-- **preco**: Preço em reais
-- **categoria**: Categoria (Informática, Periféricos, etc)
-`,
-    },
+    // 👨‍🏫 RECURSO 1: DOCUMENTAÇÃO
+    // TODO: Adicionar recurso com guia do sistema
+    // uri: "produtos://docs/guia"
+    // nome: "Guia do Sistema de Produtos"
+    // descricao: "Documentação sobre como usar o sistema"
+    // tipoMime: "text/markdown"
+    // conteudo: `# Guia do Sistema...`
   ],
 };
+

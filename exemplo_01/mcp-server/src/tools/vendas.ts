@@ -149,7 +149,9 @@ export const manipuladorBuscarVenda = (
   return async (argumentos) => {
     try {
       const { id } = argumentos;
-      const venda = await clienteApi.getSale(id);
+      // Converter string para number se necessário (robustez)
+      const idNum = typeof id === "string" ? Number(id) : id;
+      const venda = await clienteApi.getSale(idNum);
 
       return {
         content: [
@@ -225,16 +227,26 @@ export const manipuladorCriarVenda = (
     try {
       const { idProduto, quantidade, nomeCliente, precoTotal } = argumentos;
 
+      // Converter strings para numbers se necessário (robustez)
+      const idProdutoNum =
+        typeof idProduto === "string" ? Number(idProduto) : idProduto;
+      const quantidadeNum =
+        typeof quantidade === "string" ? Number(quantidade) : quantidade;
+      const precoTotalNum =
+        precoTotal && typeof precoTotal === "string"
+          ? Number(precoTotal)
+          : precoTotal;
+
       // Se preço não fornecido, calcula baseado no produto
-      let precoFinal = precoTotal;
+      let precoFinal = precoTotalNum;
       if (!precoFinal) {
-        const produto = await clienteApi.getProduct(idProduto);
-        precoFinal = produto.price * quantidade;
+        const produto = await clienteApi.getProduct(idProdutoNum);
+        precoFinal = produto.price * quantidadeNum;
       }
 
       const venda = await clienteApi.createSale({
-        productId: idProduto,
-        quantity: quantidade,
+        productId: idProdutoNum,
+        quantity: quantidadeNum,
         customerName: nomeCliente,
         totalPrice: precoFinal,
       });
@@ -364,7 +376,10 @@ export const manipuladorResumoInventario = (
 ): MCPToolHandler => {
   return async (argumentos) => {
     try {
-      const { limiteEstoqueBaixo = 20 } = argumentos;
+      // Converter string para number se necessário (robustez)
+      const limiteRaw = argumentos.limiteEstoqueBaixo ?? 20;
+      const limiteEstoqueBaixo =
+        typeof limiteRaw === "string" ? Number(limiteRaw) : limiteRaw;
 
       const [resumo, produtosEstoqueBaixo] = await Promise.all([
         clienteApi.getInventorySummary(),
@@ -451,6 +466,12 @@ export const manipuladorAtualizarEstoque = (
     try {
       const { idProduto, quantidade, operacao, motivo } = argumentos;
 
+      // Converter strings para numbers se necessário (robustez)
+      const idProdutoNum =
+        typeof idProduto === "string" ? Number(idProduto) : idProduto;
+      const quantidadeNum =
+        typeof quantidade === "string" ? Number(quantidade) : quantidade;
+
       // Mapeia operações em português para inglês (compatibilidade com API)
       const mapeamentoOperacoes: Record<string, string> = {
         adicionar: "add",
@@ -461,8 +482,8 @@ export const manipuladorAtualizarEstoque = (
       const operacaoApi = mapeamentoOperacoes[operacao] || operacao;
 
       const resultado = await clienteApi.updateStock(
-        idProduto,
-        quantidade,
+        idProdutoNum,
+        quantidadeNum,
         operacaoApi as any,
         motivo
       );

@@ -1,10 +1,13 @@
 /**
- * 🚀 SERVIDOR EXPRESS
+ * 🚀 SERVIDOR EXPRESS - ESQUELETO PARA O WORKSHOP
  *
- * Apenas 2 endpoints:
+ * 👨‍🏫 CONSTRUIR COM OS ALUNOS
+ *
+ * Endpoints a implementar:
  * - GET /produtos - Lista todos os produtos
  * - POST /produtos - Cria um novo produto
  *
+ * 💡 DICA: Veja o arquivo cola/server.js para a versão completa
  */
 
 const express = require("express");
@@ -19,10 +22,25 @@ app.use(cors());
 app.use(express.json());
 
 // ========== ENDPOINT 1: LISTAR PRODUTOS ==========
+// 👨‍🏫 IMPLEMENTAR COM OS ALUNOS
+// TODO: GET /produtos - Retorna mock.produtos
+
 
 // ========== ENDPOINT 2: CRIAR PRODUTO ==========
+// 👨‍🏫 IMPLEMENTAR COM OS ALUNOS
+// TODO: POST /produtos - Cria novo produto
+// Validar: nome, preco, categoria
+// Gerar ID: mock.proximoId++
+// Adicionar ao array: mock.produtos.push(...)
+
 
 // ========== HEALTH CHECK ==========
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    produtos: mock.produtos.length,
+  });
+});
 
 // Iniciar servidor
 app.listen(PORT, () => {

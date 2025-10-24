@@ -35,9 +35,9 @@ const CONFIG = {
     groq: {
       // Cole seu token aqui (obter em https://console.groq.com/)
       token: "seu-token-aqui",
-      modelo: "qwen/qwen3-32b",
-      temperatura: 0.6, // 0.0 a 1.0
-      maxTokens: 1000, // 100 a 4096
+      modelo: "meta-llama/llama-4-scout-17b-16e-instruct", // TPM 30K Free
+      temperatura: 0.3, // 0.0 a 1.0
+      maxTokens: 500, // 100 a 4096
     },
   },
 

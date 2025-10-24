@@ -28,8 +28,8 @@ let produtos = [
   },
   {
     id: 4,
-    nome: "Teclado Mecânicox",
-    preco: 150,
+    nome: "Teclado Mecânico Razer",
+    preco: 450,
     categoria: "Periféricos",
   },
 ];
