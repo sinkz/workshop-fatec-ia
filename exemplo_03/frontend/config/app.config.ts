@@ -142,6 +142,24 @@ export const appConfig = {
   },
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // 🎭 CONFIGURAÇÃO DE PERSONALIDADE DA IA
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  personalidade: {
+    /**
+     * 🎯 PERSONALIDADE ATIVA
+     *
+     * Escolha qual estilo de chef você quer usar:
+     *
+     * - "profissional" 👨‍🍳 = Chef Profissional (técnico e preciso)
+     * - "vovo" 👵 = Vovó Carinhosa (afetiva e tradicional)
+     * - "saudavel" 🥗 = Chef Saudável (focado em nutrição)
+     *
+     * Mude aqui para trocar o estilo das respostas!
+     */
+    ativa: "vovo" as "profissional" | "vovo" | "saudavel",
+  },
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // 🎨 CONFIGURAÇÃO VISUAL DO APP
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   app: {

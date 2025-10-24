@@ -14,6 +14,7 @@ import {
   type MCPTool,
 } from "./mcp-client";
 import type { ReceitaInput } from "@/types/receita";
+import { obterPersonalidade } from "@/personalidades";
 
 // Inicializar cliente Groq
 const groq = new Groq({
@@ -22,9 +23,10 @@ const groq = new Groq({
 });
 
 /**
- * Prompt system que guia a IA
+ * Prompt system BASE que guia a IA
+ * A personalidade escolhida em app.config.ts será adicionada a este prompt
  */
-const SYSTEM_PROMPT = `Você é um assistente especializado em receitas culinárias chamado ReceitasIA.
+const SYSTEM_PROMPT_BASE = `Você é um assistente especializado em receitas culinárias chamado ReceitasIA.
 
 Você tem acesso ao banco de dados de receitas através de ferramentas MCP do Neon Database.
 
@@ -124,11 +126,12 @@ DIFICULDADE válidas: "facil", "medio", "dificil"
   ✅ {"sql": "SELECT * FROM receitas WHERE categoria = 'doce' LIMIT 10"}
   ❌ {"sql": "SELECT * FROM receitas WHERE titulo = 'Bolo de Chocolate'", "projectId": "xxx"}
 
-## ESTILO:
-- Seja amigável e use emojis relacionados a comida 🍰🍕🥗
+## ESTILO PADRÃO:
 - Responda em português brasileiro
 - Seja criativo nas sugestões
-- Sempre pergunte se o usuário quer mais detalhes`;
+- Sempre pergunte se o usuário quer mais detalhes
+
+OBSERVAÇÃO: Você tem uma personalidade específica definida abaixo que sobrescreve o estilo padrão.`;
 
 /**
  * Interface para mensagens
@@ -160,6 +163,16 @@ export async function enviarMensagemGroq(
 ): Promise<ChatResponse> {
   try {
     console.log("💬 Enviando mensagem para Groq:", userMessage);
+
+    // 🎭 Obter personalidade configurada
+    const personalidade = obterPersonalidade(appConfig.personalidade.ativa);
+    console.log(
+      `🎭 Usando personalidade: ${personalidade.nome} ${personalidade.emoji}`
+    );
+
+    // 📝 Construir prompt completo (base + personalidade)
+    const SYSTEM_PROMPT =
+      SYSTEM_PROMPT_BASE + "\n\n" + personalidade.promptAdicional;
 
     // Buscar ferramentas MCP disponíveis
     const mcpTools = await buscarFerramentasMCP();
